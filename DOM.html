@@ -6,7 +6,35 @@
     <title>DOM</title>
 </head>
 <body>
-    
+    <input type="text" id="inputText" placeholder="Digite aqui">
+    <button id="button">Adicionar</button>
+    <ul id="taskList"></ul>
+
+    <script>
+        const inputTxt = document.getElementById("inputText");
+        const btn = document.getElementById("button");
+        const tskList = document.getElementById("taskList");
+
+        btn.addEventListener("click", function() {
+
+            const inputText = inputTxt.value.trim();
+
+            if (inputText === '') {
+                alert("Campo vazio. Você precisa digitar algo!")
+                return
+            }
+        
+
+        
+
+        })
+
+
+
+
+
+    </script>
+
     
 </body>
 </html>
