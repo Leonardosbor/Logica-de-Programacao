@@ -15,26 +15,35 @@
         const btn = document.getElementById("button");
         const tskList = document.getElementById("taskList");
 
-        btn.addEventListener("click", function() {
+        function loadElements() {
 
-            const inputText = inputTxt.value.trim();
+            for (let i = 1; i <= 100; i++) {
+                
+                // criação dos itens da lista e do botão de delete
+                const newItem = document.createElement("li");
+                const deleteButton = document.createElement("button");
+                
+                // edição do conteúdo dos itens e do botão
+                newItem.textContent = "Tarefa " + i;
+                deleteButton.textContent = "x";
 
-            if (inputText === '') {
-                alert("Campo vazio. Você precisa digitar algo!")
-                return
+                // para os resultados aparecerem na tela
+                newItem.appendChild(deleteButton);
+                tskList.appendChild(newItem);
             }
-        
+        }
 
-        
+        loadElements();
 
+        tskList.addEventListener("click", function(evento) {
+            if (evento.target.textContent === 'x') {
+                evento.target.parentElement.remove();
+            }
         })
 
 
 
 
-
     </script>
-
-    
 </body>
 </html>
