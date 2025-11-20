@@ -10,40 +10,43 @@
     <button id="button">Adicionar</button>
     <ul id="taskList"></ul>
 
-    <script>
+   <script>
         const inputTxt = document.getElementById("inputText");
-        const btn = document.getElementById("button");
+        const addBtn = document.getElementById("button");
         const tskList = document.getElementById("taskList");
 
-        function loadElements() {
 
-            for (let i = 1; i <= 100; i++) {
-                
-                // criação dos itens da lista e do botão de delete
-                const newItem = document.createElement("li");
-                const deleteButton = document.createElement("button");
-                
-                // edição do conteúdo dos itens e do botão
-                newItem.textContent = "Tarefa " + i;
-                deleteButton.textContent = "x";
+        addBtn.addEventListener("click", () => {
+            
+            const inputText = inputTxt.value.trim();
 
-                // para os resultados aparecerem na tela
-                newItem.appendChild(deleteButton);
-                tskList.appendChild(newItem);
+            if (inputText === "") {
+                alert("O campo está vazio. Digite algo!")
+                inputText.focus();
+                return
             }
-        }
 
-        loadElements();
+            const newItem = document.createElement("li");
+            const deleteButton = document.createElement("button");
+            
+            newItem.textContent = inputText;
+            deleteButton.textContent = "x"
 
-        tskList.addEventListener("click", function(evento) {
-            if (evento.target.textContent === 'x') {
-                evento.target.parentElement.remove();
-            }
+            newItem.appendChild(deleteButton);
+            tskList.appendChild(newItem);
+
+            inputTxt.value = '';
+            inputTxt.focus();
         })
 
 
+        tskList.addEventListener('click', (evento) => {
 
+                if (evento.target.textContent === 'x') {
+                    evento.target.parentElement.remove();
+                }
+        })
 
-    </script>
+   </script>
 </body>
 </html>
