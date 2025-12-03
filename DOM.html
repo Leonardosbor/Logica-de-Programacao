@@ -1,52 +1,25 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="ptbr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DOM</title>
 </head>
 <body>
-    <input type="text" id="inputText" placeholder="Digite aqui">
-    <button id="button">Adicionar</button>
-    <ul id="taskList"></ul>
+    <ul>
+        <li class="destaque">Item 1</li>
+        <li>Item 2</li>
+        <li class="destaque">Item 3</li>
+        <li>Item 4</li>
+        <li>Item 5</li>
+    </ul>
 
-   <script>
-        const inputTxt = document.getElementById("inputText");
-        const addBtn = document.getElementById("button");
-        const tskList = document.getElementById("taskList");
+    <script>
+        const listItem = document.querySelectorAll('.destaque');
 
-
-        addBtn.addEventListener("click", () => {
-            
-            const inputText = inputTxt.value.trim();
-
-            if (inputText === "") {
-                alert("O campo está vazio. Digite algo!")
-                inputText.focus();
-                return
-            }
-
-            const newItem = document.createElement("li");
-            const deleteButton = document.createElement("button");
-            
-            newItem.textContent = inputText;
-            deleteButton.textContent = "x"
-
-            newItem.appendChild(deleteButton);
-            tskList.appendChild(newItem);
-
-            inputTxt.value = '';
-            inputTxt.focus();
+        listItem.forEach(item => {
+            item.style.color = 'orange';
         })
-
-
-        tskList.addEventListener('click', (evento) => {
-
-                if (evento.target.textContent === 'x') {
-                    evento.target.parentElement.remove();
-                }
-        })
-
-   </script>
+    </script>
 </body>
 </html>
