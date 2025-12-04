@@ -4,22 +4,32 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DOM</title>
+    <style>
+        .fundo-cabuloso {
+            background-color: lightblue;
+            border: 3px solid darkblue;
+            color: darkblue;
+            padding: 10px;
+            transition: all 0.5;
+        }
+    </style>
 </head>
 <body>
-    <ul>
-        <li class="destaque">Item 1</li>
-        <li>Item 2</li>
-        <li class="destaque">Item 3</li>
-        <li>Item 4</li>
-        <li>Item 5</li>
-    </ul>
+    <p id="paragrafo">Cruzeiro</p>
+    <button id="button">Mudar Cor</button>
 
     <script>
-        const listItem = document.querySelectorAll('.destaque');
+        const paragraph = document.getElementById('paragrafo');
+        const btn = document.getElementById('button');
 
-        listItem.forEach(item => {
-            item.style.color = 'green';
-        })
+        btn.addEventListener('click', () => {
+            paragraph.classList.toggle('fundo-cabuloso');
+            if (paragraph.classList.contains('fundo-cabuloso')) {
+                btn.textContent = 'Remover Estilo'
+            } else {
+                btn.textContent = 'Aplicar Estilo';
+            };
+        });
     </script>
 </body>
 </html>
