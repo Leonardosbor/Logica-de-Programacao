@@ -4,34 +4,37 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DOM</title>
-    <style>
-        .fundo-cabuloso {
-            background-color: lightblue;
-            border: 3px solid darkblue;
-            color: darkblue;
-            padding: 10px;
-            transition: all 0.5s;
-        }
-    </style>
+    
 </head>
 <body>
-    <p id="paragrafo">Cruzeiro</p>
-    <button id="button">Mudar Cor</button>
+    <div id="conteiner-pai">
+        <p id="paragrafo-filho">Mensagens dinâmicas abaixo</p>
+    </div>
+    <button id="btn">Adicionar Item</button>
 
     <script>
-        const paragraph = document.getElementById('paragrafo');
-        const btn = document.getElementById('button');
+        const conteinerPai = document.getElementById('conteiner-pai');
+        const addbtn = document.getElementById('btn');
+        let contador = 1;
 
-        btn.addEventListener('click', () => {
-            paragraph.classList.toggle('fundo-cabuloso');
-            
-            // Mudar o conteúdo do botão
-            if (paragraph.classList.contains('fundo-cabuloso')) {
-                btn.textContent = 'Remover Estilo'
-            } else {
-                btn.textContent = 'Aplicar Estilo';
-            };
-        });
+        addbtn.addEventListener("click", () => {
+            const newParagraph = document.createElement('p');
+            const dltbtn = document.createElement('button');
+
+            newParagraph.textContent = `Item número ${contador}`;
+            newParagraph.style.color = 'darkBlue';
+            newParagraph.style.backgroundColor = 'lightBlue';
+            newParagraph.style.fontWeight = 'bold';
+            dltbtn.textContent = 'X';
+
+            dltbtn.addEventListener("click", () => {
+                newParagraph.remove();
+            })
+
+            newParagraph.appendChild(dltbtn)
+            conteinerPai.appendChild(newParagraph);
+            contador++;
+        })
     </script>
 </body>
 </html>
