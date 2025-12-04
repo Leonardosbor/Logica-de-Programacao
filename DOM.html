@@ -17,6 +17,12 @@
         const addbtn = document.getElementById('btn');
         let contador = 1;
 
+        conteinerPai.addEventListener('click', (e) => {
+            if (e.target.classList.contains("dltbtn")) {
+                e.target.parentElement.remove();
+            }
+        })
+
         addbtn.addEventListener("click", () => {
             const newParagraph = document.createElement('p');
             const dltbtn = document.createElement('button');
@@ -26,12 +32,13 @@
             newParagraph.style.backgroundColor = 'lightBlue';
             newParagraph.style.fontWeight = 'bold';
             dltbtn.textContent = 'X';
+            dltbtn.classList.add('dltbtn');
 
-            dltbtn.addEventListener("click", () => {
+            /* dltbtn.addEventListener("click", () => {
                 newParagraph.remove();
-            })
+            }) */
 
-            newParagraph.appendChild(dltbtn)
+            newParagraph.appendChild(dltbtn);
             conteinerPai.appendChild(newParagraph);
             contador++;
         })
