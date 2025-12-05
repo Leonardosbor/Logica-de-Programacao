@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ptbr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM</title>
+    
+</head>
+<body>
+    <!--<form id="form">
+        <input type="text" id="taskInput" placeholder="Adicione um item aqui">
+        <button type="submit">Adicionar</button>
+    </form>
+
+    <ul id="listItem"></ul> 
+
+
+    <script>
+        const form = document.getElementById('form');
+        const input = document.getElementById('taskInput');
+        const list = document.getElementById('listItem');
+
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const taskInput = input.value.trim();
+
+            if (taskInput === '') {
+                alert('O campo está vazio. Você precisa incluir um item!');
+                return;
+            }
+
+            const newItem = document.createElement('li');
+            newItem.textContent = taskInput;
+
+            list.appendChild(newItem);
+            input.value = '';
+            input.focus();
+
+        })
+    </script> -->
+
+    <input type="text" id="input" placeholder="Insira um item aqui">
+    <button id="addbtn">Adicionar</button>
+    <ul id="listItem"></ul>
+
+    <script>
+        const itemInput = document.getElementById('input');
+        const btn = document.getElementById('addbtn');
+        const list = document.getElementById('listItem');
+
+        btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            const input = itemInput.value.trim();
+
+            if (input === '') {
+                alert('O campo está vazio. Você precisa incluir um item para seguir em frente!');
+                return;
+            }
+
+            const newItem = document.createElement('li');
+            newItem.textContent = input;
+
+            list.appendChild(newItem);
+            itemInput.value = '';
+            itemInput.focus();
+        })
+    </script>
+
+
+</body>
+</html>
