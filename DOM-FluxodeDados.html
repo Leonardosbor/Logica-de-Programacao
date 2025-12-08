@@ -6,6 +6,28 @@
     <title>Fluxo de Dados</title>
 </head>
 <body>
-    
+    <form id="formm">
+        <input type="text" id="input" placeholder="Adicione um item aqui">
+        <button id="addbutton">Adicionar</button>
+    </form>
+
+    <ul id="listItem"></ul>
+
+    <script>
+        const form = document.getElementById('formm')
+        const addbtn = document.getElementById('addbutton');
+        const listItems = document.getElementById('listItem');
+
+        let tarefas [
+            {texto: 'Cruzeiro campeão CdB', concluída: true};
+            {texto: 'CAM campeão Sula', concluída: false};
+        ];
+
+        function renderTask() {
+            listItems.innerHTML = '';
+
+            tarefas.forEach(tarefa,)
+        }
+    </script>
 </body>
 </html>
