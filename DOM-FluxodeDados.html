@@ -6,28 +6,47 @@
     <title>Fluxo de Dados</title>
 </head>
 <body>
-    <form id="formm">
-        <input type="text" id="input" placeholder="Adicione um item aqui">
-        <button id="addbutton">Adicionar</button>
+    <form id="form">
+        <input type="text" id="inputArea" placeholder="Insira um item">
+        <button id="button">Adicionar</button>
     </form>
 
     <ul id="listItem"></ul>
 
     <script>
-        const form = document.getElementById('formm')
-        const addbtn = document.getElementById('addbutton');
-        const listItems = document.getElementById('listItem');
+        const input = document.getElementById('inputArea');
+        const btn = document.getElementById('button');
+        const list = document.getElementById('listItem');
 
-        let tarefas [
-            {texto: 'Cruzeiro campeão CdB', concluída: true};
-            {texto: 'CAM campeão Sula', concluída: false};
+        let tasks [
+
+            {text: 'Cruzeiro campeão da Cdb 2025', finished: true},
+            {text 'CAM vice da Sula', finished: false}
         ];
 
-        function renderTask() {
-            listItems.innerHTML = '';
 
-            tarefas.forEach(tarefa,)
+        function renderTask() {
+
+            list.innerHTML = '';
+
+            tasks.forEach((task, index) => {
+                
+            })
+
+            const newElement = document.getElementById('li');
+            newElement.textContent = `${task.text}`
+            
+            const dltbtn = document.getElementById('button');
+            dltbtn.textContent = 'X';
+            dltbtn.classList.add('delete-button');
+            dltbtn.dataset.index = index;
+
+            newElement.appendChild(dltbtn);
+            list.appendChild(ewElement);
+
         }
+
+            
     </script>
 </body>
 </html>
