@@ -18,33 +18,39 @@
         const btn = document.getElementById('button');
         const list = document.getElementById('listItem');
 
-        let tasks [
-
-            {text: 'Cruzeiro campeão da Cdb 2025', finished: true},
-            {text 'CAM vice da Sula', finished: false}
+        let tasks = [
+            {text: 'Cruzeiro Campeão da Cdb', completed: true},
+            {text: 'Flamengo campeão da Libertadores', completed: true},
+            {text: 'CAM campeão da SULA', completed: false},
+            {text: 'Inter rebaixado', completed: false},
+            {text: 'Fortaleza e Ceará rebaixados', completed: true},
         ];
 
 
         function renderTask() {
-
             list.innerHTML = '';
 
             tasks.forEach((task, index) => {
-                
+
+                const newElement = document.createElement('li');
+
+                if (text.concluded){
+                    newElement.style.textDecoration = 'line-through';
+                    newElement.style.color = 'red';
+                }
+
+                newElement.textContent = `${task.text}`;
+
+                const dltbtn = document.createElement('button');
+                dltbtn.textContent = 'X';
+                dltbtn.classList.add('delete-button');
+                dltbtn.dataset.index = index;
+
+                newElement.appendChild(dltbtn);
+                list.appendChild(newElement);
+
             })
-
-            const newElement = document.getElementById('li');
-            newElement.textContent = `${task.text}`
-            
-            const dltbtn = document.getElementById('button');
-            dltbtn.textContent = 'X';
-            dltbtn.classList.add('delete-button');
-            dltbtn.dataset.index = index;
-
-            newElement.appendChild(dltbtn);
-            list.appendChild(ewElement);
-
-        }
+        };
 
             
     </script>
