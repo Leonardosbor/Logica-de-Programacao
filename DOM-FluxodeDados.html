@@ -17,13 +17,14 @@
         const input = document.getElementById('inputArea');
         const btn = document.getElementById('button');
         const list = document.getElementById('listItem');
+        const form = document.getElementById('form');
 
         let tasks = [
-            {text: 'Cruzeiro Campeão da Cdb', completed: true},
-            {text: 'Flamengo campeão da Libertadores', completed: true},
-            {text: 'CAM campeão da SULA', completed: false},
-            {text: 'Inter rebaixado', completed: false},
-            {text: 'Fortaleza e Ceará rebaixados', completed: true},
+            {text: 'Lavar a louça', completed: false},
+            {text: 'Limpar areia dos gatinhos', completed: false},
+            {text: 'Fazer almoço', completed: true},
+            {text: 'Lavar roupa', completed: true},
+            {text: 'Pagar as contas', completed: true},
         ];
 
 
@@ -31,27 +32,51 @@
             list.innerHTML = '';
 
             tasks.forEach((task, index) => {
+                const newElement = document.createElement('li');
+                newElement.textContent = `${task.text}`;
 
-            const newElement = document.createElement('li');
+                if (task.completed) {
+                    newElement.style.textDecoration = 'line-through';
+                    newElement.style.color = 'red'
+                }
 
-            if (task.completed) {
-                newElement.style.textDecoration = 'line-through';
-                newElement.style.color = 'purple';
-            }
+                const deleteButton = document.createElement('button');
+                deleteButton.textContent = 'X'
+                deleteButton.classList.add('delete-button');
+                deleteButton.dataset.index = index;
 
-            newElement.textContent = `${task.text}`;
-            
-            const deleteButton = document.createElement('button');
-            deleteButton.textContent = 'X'
-            deleteButton.classList.add('delete-button');
-            deleteButton.dataset.index = index;
-            
-            newElement.appendChild(deleteButton);
-            list.appendChild(newElement);
+                newElement.appendChild(deleteButton);
+                list.appendChild(newElement);
             })
-        };
+        }
 
+
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const addedItem = input.value.trim();
+
+            if (addedItem) {
+                tasks.push({text: addedItem, completed: false})
+            };
+
+            renderTask();
+            input.focus();
+            input.value = '';
+
+        })
         
+
+        list.addEventListener('click', (e) => {
+            if (e.target.classList.contains('delete-button')) {
+                const indexToRemove = parseInt(e.target.dataset.index)
+                tasks.splice(indexToRemove, 1);
+                renderTask();
+            };
+
+
+        })
+
+        renderTask();
     </script>
 </body>
 </html>
