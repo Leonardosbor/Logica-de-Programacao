@@ -59,7 +59,7 @@
                 tasks.push({text: addedItem, completed: false})
             };
 
-            //renderTask();
+            renderTask();
             input.focus();
             input.value = '';
 
@@ -70,7 +70,7 @@
             if (e.target.classList.contains('delete-button')) {
                 const indexToRemove = parseInt(e.target.dataset.index)
                 tasks.splice(indexToRemove, 1);
-                //renderTask();
+                renderTask();
             };
 
 
