@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fluxo de Dados</title>
+    <title>LocalStorage</title>
 </head>
 <body>
     <form id="form">
@@ -19,14 +19,27 @@
         const list = document.getElementById('listItem');
         const form = document.getElementById('form');
 
-        let tasks = [
-            {text: 'Lavar a louça', completed: false},
-            {text: 'Limpar areia dos gatinhos', completed: false},
-            {text: 'Fazer almoço', completed: true},
-            {text: 'Lavar roupa', completed: true},
-            {text: 'Pagar as contas', completed: true},
-        ];
+         let tasks = []; 
 
+        function saveTasks() {
+            localStorage.setItem('myTasks', JSON.stringify(tasks));
+        }
+
+        function loadTasks() {
+            const savedTasks = localStorage.getItem('myTasks')
+
+            if (savedTasks) {
+                tasks = JSON.parse(savedTasks);
+            } else {
+                tasks = [
+                    {text: 'Lavar a louça', completed: false},
+                    {text: 'Limpar areia dos gatinhos', completed: false},
+                    {text: 'Fazer almoço', completed: true},
+                    {text: 'Lavar roupa', completed: true},
+                    {text: 'Pagar as contas', completed: true}
+                ]
+            }
+        }
 
         function renderTask() {
             list.innerHTML = '';
@@ -59,6 +72,7 @@
                 tasks.push({text: addedItem, completed: false})
             };
 
+            saveTasks();
             renderTask();
             input.focus();
             input.value = '';
@@ -70,12 +84,14 @@
             if (e.target.classList.contains('delete-button')) {
                 const indexToRemove = parseInt(e.target.dataset.index)
                 tasks.splice(indexToRemove, 1);
+                saveTasks();
                 renderTask();
             };
 
 
         })
 
+        loadTasks();
         renderTask();
     </script>
 </body>
