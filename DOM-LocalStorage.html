@@ -19,7 +19,79 @@
         const list = document.getElementById('listItem');
         const form = document.getElementById('form');
 
-         let tasks = []; 
+
+        let tasks = [];
+
+        function saveTasks() {
+            localStorage.setItem('myTasks', JSON.stringify(tasks));
+        }
+
+
+        function loadTasks() {
+            const savedTasks = localStorage.getItem('myTasks');
+
+            if (savedTasks) {
+                tasks = JSON.parse(savedTasks);
+            }
+        }
+        
+        
+        function renderTask() {
+
+            list.innerHTML = '';
+
+            tasks.forEach((task, index) => {
+                const newElement = document.createElement('li');
+                newElement.textContent = `${task.text}`;
+
+                if (task.completed) {
+                    newElement.style.textDecoration = 'line-through';
+                    newElement.style.color = 'purple';
+                }
+                
+                const deleteButton = document.createElement('button');
+                deleteButton.textContent = 'x';
+                deleteButton.classList.add('delete-button');
+                deleteButton.dataset.index = index;
+
+                newElement.appendChild(deleteButton);
+                list.appendChild(newElement);
+            })
+        }
+
+
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const addedItem = input.value.trim();
+                
+                if (addedItem) {
+                    tasks.push({text: addedItem, completed: false})
+                };
+
+                saveTasks()
+                renderTask();
+                input.focus();
+                input.value = '';
+                
+                
+            })
+
+
+            list.addEventListener('click', (e) => {
+                if (e.target.classList.contains('delete-button')) {
+                    const indexToRemove = parseInt(e.target.dataset.index);
+                    tasks.splice(indexToRemove, 1);
+                    saveTasks();
+                    renderTask();
+                    
+                }
+            })
+
+            loadTasks();
+            renderTask();
+
+
+            /* let tasks = []; 
 
         function saveTasks() {
             localStorage.setItem('myTasks', JSON.stringify(tasks));
@@ -92,7 +164,12 @@
         })
 
         loadTasks();
-        renderTask();
-    </script>
+        renderTask(); */
+
+</script>
+     
+
+        
+    
 </body>
 </html>
