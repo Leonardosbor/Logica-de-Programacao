@@ -42,6 +42,7 @@
 
             tasks.forEach((task, index) => {
                 const newElement = document.createElement('li');
+                newElement.style.cursor = 'pointer';
                 newElement.textContent = `${task.text}`;
 
                 if (task.completed) {
@@ -76,7 +77,7 @@
                 
             })
 
-
+            // para remover da lista
             list.addEventListener('click', (e) => {
                 if (e.target.classList.contains('delete-button')) {
                     const indexToRemove = parseInt(e.target.dataset.index);
@@ -84,15 +85,19 @@
                     saveTasks();
                     renderTask();
                     
+                // marcar como concluído
+                } else if (e.target.tagName === 'LI') {
+                    const btn = e.target.querySelector('.delete-button');
+                    const index = parseInt(btn.dataset.index);
+                    tasks[index].completed = !tasks[index].completed;
+                    saveTasks();
+                    renderTask();
+
                 }
             })
 
             loadTasks();
             renderTask();
 </script>
-     
-
-        
-    
 </body>
 </html>
