@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ID</title>
+    <title>LocalStorage</title>
 </head>
 <body>
     <form id="form">
@@ -12,8 +12,9 @@
     </form>
 
     <ul id="listItem"></ul>
-
+    
     <script>
+        
         const input = document.getElementById('inputArea');
         const btn = document.getElementById('button');
         const list = document.getElementById('listItem');
@@ -77,23 +78,27 @@
                 
             })
 
-            // para remover da lista
+            // Estudar essa parte
+            // Filter → deletar; Map → editar/atualizar
             list.addEventListener('click', (e) => {
-                if (e.target.classList.contains('delete-button')) {
-                    const clickedID = Number(e.target.dataset.id);
-                    tasks = tasks.filter(task => task.id !== clickedID)
-                    saveTasks();
-                    renderTask();
-                    
-                // marcar como concluído
-                } else if (e.target.tagName === 'LI') {
-                    const btn = e.target.querySelector('.delete-button');
-                    const index = parseInt(btn.dataset.index);
-                    tasks[index].completed = !tasks[index].completed;
-                    saveTasks();
-                    renderTask();
+                const parentLI = e.target.closest('li');
+                const deleteButton = parentLI.querySelector('.delete-button');
+                const clickedId = Number(deleteButton.dataset.id);
 
+                if (e.target.classList.contains('delete-button')) {
+                    tasks = tasks.filter(task => task.id !== clickedId); 
+                } else {
+                    tasks = tasks.map(task => {
+                        if (task.id === clickedId) {
+                            return {...task, completed: !task.completed}
+                        }
+                        return task;
+                    })
                 }
+            
+                saveTasks();
+                renderTask();
+
             })
 
             loadTasks();

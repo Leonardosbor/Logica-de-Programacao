@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="ptbr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>POO</title>
+</head>
+<body>
+    <form id="form">
+        <input type="text" id="inputArea" placeholder="Insira um item">
+        <button id="button">Adicionar</button>
+    </form>
+
+    <ul id="listItem"></ul>
+    
+    <script>
+
+        class TodoApp {
+            constructor() {
+                
+                this.form = document.getElementById('form');
+                this.input = document.getElementById('inputArea');
+                this.list = document.getElementById('listItem');
+                this.button = document.getElementById('button');
+
+                this.tasks = JSON.parse(localStorage.getItem("MyTasks")) || [];
+                this.render();
+                this.setupEvents();
+
+            }
+
+            save() {
+                localStorage.setItem("MyTasks", JSON.stringify(this.tasks));
+            }
+
+            render() {
+                this.list.innerHTML = '';
+                this.tasks.forEach((task) => {
+
+                    const newElement = document.createElement('li');
+                    newElement.textContent = task.text;
+                    newElement.style.cursor = 'pointer';
+
+                    if (task.completed) {
+                        newElement.style.textDecoration = 'line-through';
+                        newElement.style.color = 'red';
+                    }
+
+                    const deleteButton = document.createElement('button');
+                    deleteButton.textContent = 'x';
+                    deleteButton.classList.add('delete-button');
+                    deleteButton.dataset.id = task.id;
+
+                    newElement.appendChild(deleteButton);
+                    this.list.appendChild(newElement);
+                })
+            }
+
+
+            setupEvents() {
+                this.form.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    this.addTask();
+                })
+
+                this.list.addEventListener('click', (e) => {
+                    this.handleClicks(e);
+                })
+            }
+
+
+            addTask() {
+                const text = this.input.value.trim();
+                if (text) {
+                    this.tasks.push({id: Date.now(), text: text, completed: false});
+                    this.save();
+                    this.render();
+                    this.input.value = '';
+                    this.input.focus();
+                }
+            }
+
+
+            handleClicks(e) {
+                const parentLI = e.target.closest('li');
+                if (!parentLI) return; 
+                const btn = parentLI.querySelector('.delete-button');
+                const clickedID = Number(btn.dataset.id);
+
+                if (e.target.classList.contains('delete-button')) {
+                    this.tasks = this.tasks.filter(task => task.id !== clickedID);
+                    } else {
+                        this.tasks = this.tasks.map(task => {
+                            if (task.id === clickedID) {
+                                return {... task, completed: !task.completed}
+                            }
+                            return task;
+                        })
+                    }
+                    this.save();
+                    this.render();
+                
+            }
+
+        }
+
+        const MyApp = new TodoApp();
+        
+        /* const input = document.getElementById('inputArea');
+        const btn = document.getElementById('button');
+        const list = document.getElementById('listItem');
+        const form = document.getElementById('form');
+
+
+        let tasks = [];
+
+        function saveTasks() {
+            localStorage.setItem('myTasks', JSON.stringify(tasks));
+        }
+
+
+        function loadTasks() {
+            const savedTasks = localStorage.getItem('myTasks');
+
+            if (savedTasks) {
+                tasks = JSON.parse(savedTasks);
+            }
+        }
+        
+        
+        function renderTask() {
+
+            list.innerHTML = '';
+
+            tasks.forEach((task, index) => {
+                const newElement = document.createElement('li');
+                newElement.style.cursor = 'pointer';
+                newElement.textContent = `${task.text}`;
+
+                if (task.completed) {
+                    newElement.style.textDecoration = 'line-through';
+                    newElement.style.color = 'purple';
+                }
+                
+                const deleteButton = document.createElement('button');
+                deleteButton.textContent = 'x';
+                deleteButton.classList.add('delete-button');
+                deleteButton.dataset.id = task.id;
+
+                newElement.appendChild(deleteButton);
+                list.appendChild(newElement);
+            })
+        }
+
+
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const addedItem = input.value.trim();
+                
+                if (addedItem) {
+                    tasks.push({id: Date.now(), text: addedItem, completed: false})
+                };
+
+                saveTasks()
+                renderTask();
+                input.focus();
+                input.value = '';
+                
+                
+            })
+
+            // Estudar essa parte
+            // Filter → deletar; Map → editar/atualizar
+            list.addEventListener('click', (e) => {
+                const parentLI = e.target.closest('li');
+                const deleteButton = parentLI.querySelector('.delete-button');
+                const clickedId = Number(deleteButton.dataset.id);
+
+                if (e.target.classList.contains('delete-button')) {
+                    tasks = tasks.filter(task => task.id !== clickedId); 
+                } else {
+                    tasks = tasks.map(task => {
+                        if (task.id === clickedId) {
+                            return {...task, completed: !task.completed}
+                        }
+                        return task;
+                    })
+                }
+            
+                saveTasks();
+                renderTask();
+
+            })
+
+            loadTasks();
+            renderTask(); */
+</script>
+</body>
+</html>
