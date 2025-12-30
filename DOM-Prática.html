@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prática de JS</title>
+</head>
+<body>
+
+    <form id="form">
+        <input type="number" id="input" placeholder="Insira um número aqui">
+        <button id="button">Verificar</button>
+        <p id="message"></p>
+    </form>
+
+
+    <script>
+        const form = document.getElementById('form');
+        const button = document.getElementById('button');
+        const message = document.getElementById('message');
+        const input = document.getElementById('input');
+
+        function checkEntry(yearOfBirth) {
+            const currentYear = 2025;
+            let age = currentYear - yearOfBirth;
+
+            return (age >= 18) ? 'MAIOR de idade' : 'MENOR de idade';
+        }
+
+        button.addEventListener('click', () => {
+            let year = Number(input.value);
+            let result = checkEntry(year);
+            message.innerHTML = result
+
+        })
+    </script>
+</body>
+</html>
